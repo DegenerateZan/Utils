@@ -78,7 +78,7 @@ class ZanExceptionHandler extends HandlerUtil
         $output[] = self::getColor("cyan") . '│' . $indentation . self::getColor("yellow") . 'File: ' . self::getColor("reset") . $exception->getFile();
         $output[] = self::getColor("cyan") . '│' . $indentation . self::getColor("yellow") . 'Line: ' . self::getColor("reset") . $exception->getLine();
         if (DUMP_STACK_TRACE){
-            $output[] = self::getColor("cyan") . '│' . $indentation . self::getColor("yellow") . 'Stack Trace Dump Location: ' . self::getColor("reset") . STACK_TRACE_FILE_LOC;
+            $output[] = self::getColor("cyan") . '│' . $indentation . self::getColor("yellow") . 'Stack Trace Dump Location: ' . self::getColor("reset") . STACK_TRACE_OUTPUT;
         }
 
         $output[] = self::getColor("cyan") . '└' . $border . '┘' . self::getColor("reset");
