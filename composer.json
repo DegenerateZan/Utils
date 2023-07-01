@@ -1,0 +1,20 @@
+{
+    "name": "degeneratezan/utils",
+    "description": "Just some functions and utilities to boost my productivity",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+      {
+        "name": "Ahmad Fauzan",
+        "email": "noxindocraft@gmail.com"
+      }
+    ],
+    "autoload": {
+        "psr-4": {
+            "DegenerateZan\\Utils\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^8.0"
+      }
+  }
