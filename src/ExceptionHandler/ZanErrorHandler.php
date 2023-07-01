@@ -11,10 +11,6 @@ namespace DegenerateZan\Utils\ExceptionHandler;
  * set_exception_handler(\DegenerateZan\Utils\ExceptionHandler\ZanErrorHandler, "handle");
  * ```
  * 
- * ```
- * define("ERROR_LOG_FILE", "log/stderr.log");
-
- * ```
  */
 class ZanErrorHandler extends HandlerUtil
 {
