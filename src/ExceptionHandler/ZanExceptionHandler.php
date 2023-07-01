@@ -9,7 +9,7 @@ use Throwable;
  * 
  * if you want to use it don't forget to define the handler
  * ```
- * set_exception_handler(\DegenerateZan\Utils\ExceptionHandler\ZanExceptionHandler, "handle");
+ * set_exception_handler([\DegenerateZan\Utils\ExceptionHandler\ZanExceptionHandler, "handle"]);
  * ```
  * 
  * Warning if you dont define this, it'll auto define it
@@ -121,7 +121,7 @@ class ZanExceptionHandler extends HandlerUtil
             return;
         }
         
-        self::dumpStackTrace($tracesAsString, STACK_TRACE_FILE_LOC);
+        self::dumpStackTrace($tracesAsString, STACK_TRACE_OUTPUT);
 
     }
 

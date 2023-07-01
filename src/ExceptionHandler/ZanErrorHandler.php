@@ -8,7 +8,7 @@ namespace DegenerateZan\Utils\ExceptionHandler;
  *
  *  if you want to use it don't forget to define the handler
  * ```
- * set_exception_handler(\DegenerateZan\Utils\ExceptionHandler\ZanErrorHandler, "handle");
+ * set_exception_handler([\DegenerateZan\Utils\ExceptionHandler\ZanErrorHandler, "handle"]);
  * ```
  * 
  */
