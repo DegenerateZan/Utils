@@ -28,7 +28,7 @@ class ZanErrorHandler extends HandlerUtil
      *
      * @var bool
      */
-    protected static $fillBorders = true;
+    protected static $fillBorders = false;
 
 
 
