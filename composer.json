@@ -16,5 +16,13 @@
     },
     "require": {
         "php": "^8.0"
-      }
+      },
+    "scripts": {
+      "post-install-cmd": [
+          "php Init.php"
+      ],
+      "post-update-cmd": [
+          "php Init.php"
+      ]
   }
+}

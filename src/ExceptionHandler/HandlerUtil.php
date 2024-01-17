@@ -91,6 +91,7 @@ abstract class HandlerUtil
      */
     protected static function dumpStackTrace(string $stackTrace, string $fileLocation): void
     {
+        touch($fileLocation);
         file_put_contents($fileLocation, $stackTrace);
     }
 

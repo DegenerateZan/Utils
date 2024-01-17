@@ -46,13 +46,17 @@ class ZanExceptionHandler extends HandlerUtil
      * @param int $padding The number of lines to include before and after the error line.
      * @return void
      */
-    public static function handle(Throwable $exception, int $padding = 5): void
+    public static function handle(Throwable $exception, int $padding = 5)
     {
         if (!defined("DUMP_STACK_TRACE")){
             define("DUMP_STACK_TRACE", true);
         }
         if (!defined("STACK_TRACE_OUTPUT")){
-            define("STACK_TRACE_OUTPUT", "log/StackTraceDump.log");
+            define("STACK_TRACE_OUTPUT", "cache/StackTraceDump.log");
+        }
+
+        if (!defined("DUMP_EXCEPTION_OUTPUT")){
+            define("DUMP_EXCEPTION_OUTPUT", "cache/exception_". rand(1, 400));
         }
 
 
@@ -102,7 +106,6 @@ class ZanExceptionHandler extends HandlerUtil
 
             foreach ($output as $index => &$content) {
                 $missingChars = $maxlen - strlen(self::stripAnsi($content)) - 1 - $magicNumber;
-                var_dump($content);
                 echo PHP_EOL . "index no $index parsed str : " . strlen(self::stripAnsi($content)) .  "  raw str (non parsed) : " . strlen($content) .PHP_EOL;
                 if ($missingChars < 0) {
                     continue;
@@ -115,7 +118,12 @@ class ZanExceptionHandler extends HandlerUtil
         $output = implode(PHP_EOL, $output);
         fwrite(STDERR,$output);
 
+        
+        if(defined("DUMP_EXCEPTION_OUTPUT")){
 
+            file_put_contents(DUMP_EXCEPTION_OUTPUT. ".log", $output);
+            self::createImage(DUMP_EXCEPTION_OUTPUT. ".log", DUMP_EXCEPTION_OUTPUT. ".png");
+        }
 
         if (!DUMP_STACK_TRACE){
             return;
@@ -123,9 +131,19 @@ class ZanExceptionHandler extends HandlerUtil
         
         self::dumpStackTrace($tracesAsString, STACK_TRACE_OUTPUT);
 
+
     }
 
-
+    private static function createImage($sourceFileName, $outputFileName){
+        $os = strtolower(PHP_OS);
+        $bin = dirname(__FILE__). "/../../bin";
+        $bin = str_replace(array('/', '\\'), "/", $bin);
+        if (strpos($os, 'win') !== false) {
+             exec("powershell $bin/textimg.ps1 $bin/textimg.exe $sourceFileName $outputFileName");
+        } else {
+             exec("bash $bin/textimg.sh $bin/textimg $sourceFileName $outputFileName");
+        }
+    }
 
 
     /**

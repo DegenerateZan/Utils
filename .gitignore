@@ -1,2 +1,5 @@
 /vendor
+composer.lock
 .phpdoc
+test
+cache
