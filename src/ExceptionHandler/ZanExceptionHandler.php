@@ -2,6 +2,7 @@
 
 namespace DegenerateZan\Utils\ExceptionHandler;
 
+use Exception;
 use Throwable;
 
 /**
@@ -139,9 +140,13 @@ class ZanExceptionHandler extends HandlerUtil
         $bin = dirname(__FILE__). "/../../bin";
         $bin = str_replace(array('/', '\\'), "/", $bin);
         if (strpos($os, 'win') !== false) {
-             exec("powershell $bin/textimg.ps1 $bin/textimg.exe $sourceFileName $outputFileName");
+            $binFile = "$bin/textimg.exe";
+            if (!file_exists($binFile)) throw new Exception("Binary file '$binFile' does not exist! : ");
+             exec("powershell $bin/textimg.ps1 $binFile $sourceFileName $outputFileName");
         } else {
-             exec("bash $bin/textimg.sh $bin/textimg $sourceFileName $outputFileName");
+            $binFile = "$bin/textimg";
+            if (!file_exists($binFile)) throw new Exception("Binary file '$binFile' does not exist! : ");
+             exec("bash $bin/textimg.sh $binFile $sourceFileName $outputFileName");
         }
     }
 
